@@ -30,3 +30,22 @@
 .p-1{
   padding: 14px;
 }
+/* Width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+Track
+::-webkit-scrollbar-track {
+  background: #333; /* Dark color for the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #666; /* Darker color for the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #888; /* Lighter color when hovered */
+}
