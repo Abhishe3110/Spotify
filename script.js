@@ -25,7 +25,7 @@ async function getSongs(folder) {
     return;
   }
   currFolder = folder;
-  let a = await fetch(`http://127.0.0.1:5500/${currFolder}/`);
+  let a = await fetch(`http://127.0.0.1:5501/${currFolder}/`);
   let response = await a.text();
 
   let div = document.createElement('div');
@@ -54,7 +54,7 @@ const playMusic = (track, pause = false) => {
 }
 async function displayAlbums() {
   console.log("Display albums");
-  let a = await fetch(`http://127.0.0.1:5500/songs/`);
+  let a = await fetch(`http://127.0.0.1:5501/songs/`);
   let response = await a.text();
   let div = document.createElement('div');
   div.innerHTML = response;
@@ -66,12 +66,14 @@ async function displayAlbums() {
     if (e.href.includes("/songs")) {
       let folder = e.href.split("/").slice(-2)[0];
       //  get metadata of the folder
-      let infoUrl = `http://127.0.0.1:5500/songs/${folder}/info.json`;
+      let infoUrl = `http://127.0.0.1:5501/songs/${folder}/info.json`;
+      console.log(infoUrl);
+      console.log("the folder name is",folder);
       let a = await fetch(infoUrl);
       let response = await a.json();
       console.log(response);
       
-      cardContainer.innerHTML += `<div data-folder="cs" class="card">
+      cardContainer.innerHTML += `<div data-folder = "${folder}" class="card">
         <div class="play">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#000">
             <path
@@ -80,11 +82,11 @@ async function displayAlbums() {
           </svg>
         </div>
         <img src="/songs/${folder}/cover.jpg" alt="">
-        <h2>${response.title}</h2>
+        <h2>${response.title}</h2> 
         <p>${response.description}</p>
       </div>`;
       
-      console.log(`The folder name is: ${folder}`);
+      console.log(`The folder name is: cs`);
     }
   }
 }
@@ -219,6 +221,35 @@ async function main() {
       playMusic(songs[currentSongIndex]);
     }
   });
+ 
+// Add an event listener to the volume range input
+document.querySelector('.range input').addEventListener("input", (e) => {
+  // Update the volume level
+  currentSong.volume = parseInt(e.target.value) / 100;
+  
+  // Update the mute icon based on the volume level
+  if (currentSong.volume === 0) {
+    document.getElementById("muteButton").src = "mute.svg"; // Change to mute icon if volume is 0
+  } else {
+    document.getElementById("muteButton").src = "volume.svg"; // Change to volume icon if volume is not 0
+  }
+});
+
+// Add an event listener to the volume button
+document.getElementById("mute").addEventListener("click", () => {
+  if (currentSong.volume === 0) {
+    // If volume is already muted, unmute it and change icon
+    currentSong.volume = 0.7;
+    document.getElementById("muteButton").src = "volume.svg";
+    document.querySelector('.range input').value = 70; // Set volume level to 70%
+  } else {
+    // If volume is not muted, mute it, change icon, and set volume level to 0
+    currentSong.volume = 0;
+    document.getElementById("muteButton").src = "mute.svg";
+    document.querySelector('.range input').value = 0; // Set volume level to 0
+  }
+});
+
 }
 
 main();
