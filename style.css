@@ -313,6 +313,9 @@ body {
 .range input{
     cursor: pointer;
 }
+.arijit{
+    margin-top: 15px;
+}
 
 .abovebar {
     display: flex;
