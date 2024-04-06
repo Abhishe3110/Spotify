@@ -103,14 +103,14 @@ async function main() {
   for (const song of songs) {
     songUL.innerHTML = songUL.innerHTML + `
       <li>
-        <img class="invert" src="music.svg" alt="">
+        <img class="invert" src="/img/music.svg" alt="">
         <div class="info">
           <div>${song.replaceAll("%20", " ")}</div>
           <div>Abhishek</div>
         </div>
         <div class="playnow">
           <span>Play Now</span>
-          <img class="invert" src="play.svg" alt="">
+          <img class="invert" src="/img/play.svg" alt="">
         </div>
       </li>
     `;
@@ -127,10 +127,10 @@ async function main() {
   play.addEventListener("click", () => {
     if (currentSong.paused) {
       currentSong.play();
-      play.src = "pause.svg";
+      play.src = "/img/pause.svg";
     } else {
       currentSong.pause();
-      play.src = "play.svg";
+      play.src = "/img/play.svg";
     }
   })
   // listen for timeupdate event
@@ -185,14 +185,14 @@ async function main() {
       for (const song of songs) {
         songUL.innerHTML += `
           <li>
-            <img class="invert" src="music.svg" alt="">
+            <img class="invert" src="/img/music.svg" alt="">
             <div class="info">
               <div>${song.replaceAll("%20", " ")}</div>
               <div>Abhishek</div>
             </div>
             <div class="playnow">
               <span>Play Now</span>
-              <img class="invert" src="play.svg" alt="">
+              <img class="invert" src="/img/play.svg" alt="">
             </div>
           </li>
         `;
@@ -229,9 +229,9 @@ document.querySelector('.range input').addEventListener("input", (e) => {
   
   // Update the mute icon based on the volume level
   if (currentSong.volume === 0) {
-    document.getElementById("muteButton").src = "mute.svg"; // Change to mute icon if volume is 0
+    document.getElementById("muteButton").src = "/img/mute.svg"; // Change to mute icon if volume is 0
   } else {
-    document.getElementById("muteButton").src = "volume.svg"; // Change to volume icon if volume is not 0
+    document.getElementById("muteButton").src = "/img/volume.svg"; // Change to volume icon if volume is not 0
   }
 });
 
@@ -240,12 +240,12 @@ document.getElementById("mute").addEventListener("click", () => {
   if (currentSong.volume === 0) {
     // If volume is already muted, unmute it and change icon
     currentSong.volume = 0.7;
-    document.getElementById("muteButton").src = "volume.svg";
+    document.getElementById("muteButton").src = "/img/volume.svg";
     document.querySelector('.range input').value = 70; // Set volume level to 70%
   } else {
     // If volume is not muted, mute it, change icon, and set volume level to 0
     currentSong.volume = 0;
-    document.getElementById("muteButton").src = "mute.svg";
+    document.getElementById("muteButton").src = "/img/mute.svg";
     document.querySelector('.range input').value = 0; // Set volume level to 0
   }
 });

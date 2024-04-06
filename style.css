@@ -50,6 +50,10 @@ body {
     font-size: 13px;
 }
 
+.logo, .home1, .search{
+    cursor: pointer;
+}
+
 .heading img {
     width: 30px;
 }
